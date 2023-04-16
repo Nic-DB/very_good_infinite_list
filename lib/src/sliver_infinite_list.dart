@@ -125,7 +125,7 @@ class _SliverInfiniteListState extends State<SliverInfiniteList> {
         (!hasItems ? 0 : widget.itemCount + separatorCount) +
             (showBottomWidget ? 1 : 0);
     final lastItemIndex = effectiveItemCount - 1;
-    final onFetchIndex = !hasItems ? 0 : widget.itemCount + separatorCount;
+    final onFetchIndex = !hasItems ? 0 : widget.itemCount + separatorCount - 1;
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         childCount: effectiveItemCount,
