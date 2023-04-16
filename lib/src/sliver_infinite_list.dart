@@ -125,13 +125,13 @@ class _SliverInfiniteListState extends State<SliverInfiniteList> {
         (!hasItems ? 0 : widget.itemCount + separatorCount) +
             (showBottomWidget ? 1 : 0);
     final lastItemIndex = effectiveItemCount - 1;
-
+    final onFetchIndex = !hasItems ? 0 : widget.itemCount + separatorCount;
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         childCount: effectiveItemCount,
         (context, index) {
           if (index == lastItemIndex) {
-            onBuiltLast(lastItemIndex);
+            onBuiltLast(onFetchIndex);
           }
           if (index == lastItemIndex && showBottomWidget) {
             if (widget.hasError) {
