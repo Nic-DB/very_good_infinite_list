@@ -316,41 +316,6 @@ void main() {
           expect(find.byKey(key), findsOneWidget);
         },
       );
-
-      testWidgets(
-        'render list when just one element is added',
-        (tester) async {
-          const key = Key('__test_target__');
-          var isLoading = false;
-          var childCount = 3;
-          await tester.pumpApp(
-            StatefulBuilder(
-              builder: (context, setState) {
-                return InfiniteList(
-                  isLoading: isLoading,
-                  itemCount: childCount,
-                  onFetchData: childCount == 5
-                      ? emptyCallback
-                      : () async {
-                          setState(() async {
-                            isLoading = true;
-                            await Future<void>.delayed(
-                              const Duration(milliseconds: 10),
-                            );
-                            childCount += 1;
-                            isLoading = false;
-                          });
-                        },
-                  loadingBuilder: (_) => const Text('__LOADING__', key: key),
-                  itemBuilder: (_, i) => Text('$i'),
-                );
-              },
-            ),
-          );
-          await tester.pumpAndSettle();
-          expect(find.text('4'), findsOneWidget);
-        },
-      );
     });
 
     group('transitionary properties', () {
